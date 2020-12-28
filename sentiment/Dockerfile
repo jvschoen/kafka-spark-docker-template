@@ -14,4 +14,4 @@ RUN python -c "import nltk; nltk.download('vader_lexicon')"
 EXPOSE 9000
 COPY ./app.py /app.py
 
-CMD ["flask", "run"]
+CMD ["python3", "./app.py"]

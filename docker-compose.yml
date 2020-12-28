@@ -71,4 +71,6 @@ services:
     build: sentiment/.
     ports:
       - "9000:9000"
+    extra_hosts:
+      - "moby:127.0.0.1"
       

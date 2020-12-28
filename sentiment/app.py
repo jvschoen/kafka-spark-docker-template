@@ -6,10 +6,20 @@ import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 app = Flask(__name__)
-cache = redis.Redis(host='redis', port=6397)
+#cache = redis.Redis(host='redis', port=6397)
 sid = SentimentIntensityAnalyzer()
 
 def get_hit_count():
+    """Creates a prediction counter as a 
+    simple way to start implementing a redis
+    cache store if desired. not currently utilized
+
+    Raises:
+        exc: [description]
+
+    Returns:
+        [type]: [description]
+    """
     retries = 5
     while True:
         try:
@@ -34,9 +44,9 @@ def predict():
         str: JSON string of polarity score 
     """
     result = sid.polarity_scores(request.get_json()['data'])
-    num_preds = get_hit_count()
+    #num_preds = get_hit_count()
     return jsonify(result)
 
 if __name__ == '__main__':
-    app.run(port=9000)
+    app.run(host='0.0.0.0', port=9000)
     
