@@ -1,0 +1,6 @@
+pyspark
+findspark
+confluent-kafka
+pandas 
+requests 
+uuid
