@@ -61,14 +61,17 @@ services:
     build: notebooks/.
     volumes:
       - ./notebooks:/home/jovyan/
+    environment:
+      - GRANT_SUDO=yes
+      - JUPYTER_ENABLE_LAB=yes
     ports:
       - "8888:8888"
     
 
-  flask-ml-predict:
-    hostname: sentiment
-    container_name: sentiment-pred
-    build: sentiment/.
+  flask-ml:
+    hostname: ml
+    container_name: ml-pred
+    build: ml-rest-flask/.
     ports:
       - "9000:9000"
     extra_hosts:
