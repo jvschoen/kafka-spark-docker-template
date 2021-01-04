@@ -58,16 +58,19 @@ services:
 
   jupyter:
     container_name: jupyter
+    user: root
     build: notebooks/.
     volumes:
       - ./notebooks:/home/jovyan/
     ports:
       - "8888:8888"
-    
+    environment:
+      - GRANT_SUDO=yes
+      - JUPYTER_ENABLE_LAB=yes
 
   flask-ml-predict:
-    hostname: sentiment
-    container_name: sentiment-pred
+    hostname: ml
+    container_name: ml
     build: sentiment/.
     ports:
       - "9000:9000"
