@@ -58,6 +58,7 @@ services:
 
   jupyter:
     container_name: jupyter
+    user: root
     build: notebooks/.
     volumes:
       - ./notebooks:/home/jovyan/
@@ -66,7 +67,9 @@ services:
       - JUPYTER_ENABLE_LAB=yes
     ports:
       - "8888:8888"
-    
+    environment:
+      - GRANT_SUDO=yes
+      - JUPYTER_ENABLE_LAB=yes
 
   flask-ml:
     hostname: ml

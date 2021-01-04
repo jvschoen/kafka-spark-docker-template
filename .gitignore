@@ -6,3 +6,8 @@ venv/
 .ivy2/
 .jupyter/
 .local/
+.idea/
+.bash_history
+.npm/
+.yarn/
+spark-warehouse/
