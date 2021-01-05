@@ -4,3 +4,4 @@ confluent-kafka
 pandas 
 requests 
 uuid
+tweepy
