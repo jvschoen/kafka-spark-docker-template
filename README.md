@@ -1,4 +1,9 @@
-# Testing kafka spark streaming
+# Overview
+
+This template repo uses docker compose to build multiple containers for Kafka, zookeeper, flask, and spark/jupyter for use with developing real time machine learning solutions.
+
+
+# Resources 
 Based off:
 https://github.com/BogdanCojocar/medium-articles/tree/master/realtime_kafka
 
