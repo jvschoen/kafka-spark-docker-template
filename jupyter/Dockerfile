@@ -1,7 +1,7 @@
 FROM jupyter/pyspark-notebook:${JUPYTER_VERSION:-latest}
 
-COPY ./requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+COPY ./notebooks/requirements.txt notebooks/requirements.txt
+RUN pip install -r ./notebooks/requirements.txt
 RUN pip install --upgrade jupyterlab
 
 # To be able to run 3.0.0 https://github.com/jupyter/docker-stacks/issues/1205

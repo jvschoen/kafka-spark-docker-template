@@ -3,7 +3,7 @@ version: '2'
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:5.2.0
-    container_name: zookeeper_kafka-spark-docker-template
+    container_name: zookeeper_INSERT_REPO_NAME
     hostname: zookeeper
     ports:
       - '2181:2181'
@@ -17,7 +17,7 @@ services:
 
   kafka:
     image: confluentinc/cp-kafka:5.2.0
-    container_name: kafka_kafka-spark-docker-template
+    container_name: kafka_INSERT_REPO_NAME
     hostname: kafka
     ports:
       - '9092:9092'
@@ -32,9 +32,9 @@ services:
       KAFKA_LOG4J_LOGGERS: "kafka.controller=WARN"
       KAFKA_LOG4J_ROOT_LOGLEVEL: "WARN"
       KAFKA_TOOLS_LOG4J_LOGLEVEL: "ERROR"
-      # Retain messages for 10 minutes, check every 60s
-      KAFKA_LOG_RETENTION_MS: 600000
-      KAFKA_LOG_RETENTION_CHECK_INTERVAL_MS: 60000
+      # Retain messages for 1 minute, check every 30s
+      KAFKA_LOG_RETENTION_MS: 60000
+      KAFKA_LOG_RETENTION_CHECK_INTERVAL_MS: 30000
     extra_hosts:
       - "moby:127.0.0.1"
       
@@ -42,7 +42,7 @@ services:
     image: confluentinc/cp-kafka:5.2.0
     depends_on:
       - kafka
-    container_name: kafka-create-topics_kafka-spark-docker-template
+    container_name: kafka-create-topics_INSERT_REPO_NAME
     hostname: kafka-create-topics
     command: "bash -c 'echo Waiting for Kafka to be ready... && \
                        cub kafka-ready -b kafka:9092 1 20 && \
@@ -55,11 +55,15 @@ services:
       - "moby:127.0.0.1"
   
   jupyter:
-    container_name: jupyter_kafka-spark-docker-template
+    container_name: jupyter_INSERT_REPO_NAME
     user: root
     build: jupyter/.
     volumes:
       - ./jupyter/notebooks:/home/jovyan/notebooks
+      
+      # This ensures we can just have the key in one central location for local and on docker
+      # If this image ends up being pushed to the cloud, then the file must be copied.
+      - $HOME/.aws/credentials:/home/jovyan/.aws/credentials:ro
     environment:
       - GRANT_SUDO=yes
       - JUPYTER_ENABLE_LAB=yes
@@ -70,7 +74,7 @@ services:
       - JUPYTER_ENABLE_LAB=yes
 
   flask-ml:
-    container_name: flask-ml_kafka-spark-docker-template
+    container_name: flask-ml_INSERT_REPO_NAME
     hostname: ml
     build: ml-rest-flask/.
     ports:

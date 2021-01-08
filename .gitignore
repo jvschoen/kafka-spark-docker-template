@@ -11,3 +11,6 @@ venv/
 .npm/
 .yarn/
 spark-warehouse/
+
+# These are backup files for archive purposes locally
+*.bak
