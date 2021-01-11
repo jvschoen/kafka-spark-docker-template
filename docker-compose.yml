@@ -60,6 +60,11 @@ services:
     build: jupyter/.
     volumes:
       - ./jupyter/notebooks:/home/jovyan/notebooks
+      # This ensures we can just have the key in one central location for local and on docker
+      # If this image ends up being pushed to the cloud, then the file must be copied.
+      - $HOME/.aws/credentials:/home/jovyan/.aws/credentials:ro
+      # Provides twitter developer tokens
+      - $HOME/.secrets/twitter.json:/home/jovyan/.secrets/twitter.json:ro   
     environment:
       - GRANT_SUDO=yes
       - JUPYTER_ENABLE_LAB=yes

@@ -8,6 +8,32 @@ After cloning this repo, you need to run docker-compose up and docker will build
 
 You just need to run `./setup-compose.sh` to build the environment. This script appends the github repo name to the container names to maintain uniqueness. 
 
+## Credentials.
+
+### AWS
+In order for access to AWS services, you must have the `~/.aws/credentials` on your local environment. The Docker instance has mounted this file as an external volume, so as you update your credentials locally, they will be live on your docker instance. This file is **not editable** from your docker instance, and only editable from your local OS.
+
+### Twitter
+If you are testing the Twitter sections of the notebook, you must first have developer api keys and access tokens. You can apply for one [here](https://developer.twitter.com/en/apply-for-access). The way this data is accessed is from your local home directory in a subdir called `.secrets`. Please create this directory and create a json file (`$HOME/.secrets/twitter.json`) with the following structure:
+
+```json
+{
+    "api_key": "API KEY from twitter",
+    "api_secret_key": "API SECRET KEY from twitter",
+    "bearer_token": "BEARER TOKEN FOR curl Access",
+    "access_token": "ACCESS TOKEN",
+    "access_token_secret": "ACCESS TOKEN SECRET"
+}
+```
+Some documentation for tweepy will use different naming for these keys:
+```
+CONSUMER_KEY = API_KEY
+CONSUMER_SECRET = API_SECRET_KEY
+CONSUMER_TOKEN = ACCESS_TOKEN
+CONSUMER_TOKEN_SECRET = ACCESS_TOKEN_SECRETD
+```
+
+This file will be accessible as a volume in the docker container with read-only access from `~/.secrets/twitter.json`
 
 ## Jupyter Lab
 
