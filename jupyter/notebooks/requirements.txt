@@ -1,7 +1,22 @@
+# Big Data Streaming Packages
 pyspark
 findspark
 confluent-kafka
-pandas 
+tweepy
+
+# Utils
 requests 
 uuid
-tweepy
+tqdm
+
+# Data Science
+boto3
+pandas
+pandas-profiling[notebook]
+scikit-learn
+tensorflow
+plotly
+seaborn
+matplotlib
+
+ipywidgets>=7.5
