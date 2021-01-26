@@ -59,7 +59,10 @@ services:
     user: root
     build: jupyter/.
     volumes:
+      # These mount your notebooks and data dirs to local repo to keep in sync.
       - ./jupyter/notebooks:/home/jovyan/notebooks
+      - ./jupyter/data:/home/jovyan/data
+      
       # This ensures we can just have the key in one central location for local and on docker
       # If this image ends up being pushed to the cloud, then the file must be copied.
       - $HOME/.aws/credentials:/home/jovyan/.aws/credentials:ro
